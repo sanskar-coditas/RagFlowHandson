@@ -53,8 +53,7 @@ Visit **http://localhost:3000** in your browser.
 
 ### 1. Document Chunking
 Split documents with configurable chunk size and overlap. Visualize how text is segmented for RAG.
-https://github.com/user-attachments/assets/54b2b293-8869-479a-b2b5-94c47eaf38d6
-![Chunking](https://github.com/user-attachments/assets/fb7d3c2b-56ff-4c94-a39f-aa44f2dbb3c3)
+![Chunking](https://github.com/user-attachments/assets/54b2b293-8869-479a-b2b5-94c47eaf38d6)
 
 ### 2. Embeddings Generation
 Generate vector embeddings using multiple models (Azure OpenAI, Cohere Bedrock, NVIDIA NIM).
@@ -66,14 +65,11 @@ Generate vector embeddings using multiple models (Azure OpenAI, Cohere Bedrock, 
 
 ### 3. Similarity Search & Hybrid Retrieval
 Explore vector similarity, compare dense vs sparse search, and understand RRF fusion.
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/043afc73-a883-4ab3-bba3-4fc5966ecea4" width="48%" />
-  <img src="https://github.com/user-attachments/assets/f75ea0f7-9e17-482f-a8b7-d93e8c294061" width="48%" />
-</p>
+![Similarity Search](https://github.com/user-attachments/assets/043afc73-a883-4ab3-bba3-4fc5966ecea4)
 
 ### 4. LLM Answer Generation
 Generate cited responses using the full RAG pipeline with hybrid retrieval.
+![Gen Res](https://github.com/user-attachments/assets/f75ea0f7-9e17-482f-a8b7-d93e8c294061)
 
 ## Environment Variables
 
