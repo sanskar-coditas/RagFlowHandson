@@ -120,7 +120,7 @@ export function ShortcomingViz({
                         #{r.rank}
                       </span>
                       <span className="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                        👆 hover to expand
+                        👆 click to expand
                       </span>
                     </div>
                     <span className={`font-mono text-xl font-bold ${colorClasses.text}`}>

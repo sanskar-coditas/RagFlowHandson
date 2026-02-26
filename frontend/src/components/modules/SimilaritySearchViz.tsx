@@ -342,7 +342,7 @@ export function SimilaritySearchViz({
                               }`}>
                                 {(r.score * 100).toFixed(1)}%
                               </span>
-                              <span className="text-xs text-gray-500">👆 hover for full content</span>
+                              <span className="text-xs text-gray-500">👆 click to view full content</span>
                             </div>
                             <p className="text-base text-gray-300 leading-relaxed line-clamp-2">
                               {r.text}

@@ -147,27 +147,105 @@ interface ChunkPreviewTooltipProps {
 }
 
 export function ChunkPreviewTooltip({ content, index, wordCount, charCount, children }: ChunkPreviewTooltipProps) {
-  return (
-    <Tooltip
-      content={
-        <div className="space-y-3">
-          <div className="flex items-center justify-between border-b border-cyan-500/30 pb-2">
-            <span className="font-mono font-bold text-lg text-cyan-400">Chunk #{index + 1}</span>
-            <div className="flex items-center gap-3 text-sm text-gray-400">
-              <span>{wordCount} words</span>
-              <span>•</span>
-              <span>{charCount} chars</span>
+  const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
+  // Close on click outside
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleClickOutside = (e: MouseEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen]);
+
+  const modal = mounted && isOpen && createPortal(
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[99998] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+        onClick={() => setIsOpen(false)}
+      >
+        <motion.div
+          ref={panelRef}
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="w-full max-w-2xl max-h-[80vh] flex flex-col rounded-2xl border-2 border-cyan-500/50 bg-gray-900/98 backdrop-blur-xl shadow-2xl shadow-cyan-500/30"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-cyan-500/30 p-4 flex-shrink-0">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">📄</span>
+              <span className="font-mono font-bold text-xl text-cyan-400">Chunk #{index + 1}</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <span className="bg-gray-800 px-2 py-1 rounded">{wordCount} words</span>
+                <span className="bg-gray-800 px-2 py-1 rounded">{charCount} chars</span>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-800 transition-colors text-gray-400 hover:text-white"
+                aria-label="Close"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           </div>
-          <div className="max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
+          
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
             <p className="text-gray-200 whitespace-pre-wrap text-sm leading-relaxed">{content}</p>
           </div>
-        </div>
-      }
-      maxWidth={500}
-      position="auto"
-    >
-      {children}
-    </Tooltip>
+          
+          {/* Footer hint */}
+          <div className="border-t border-gray-800 p-3 text-center text-xs text-gray-500 flex-shrink-0">
+            Press <kbd className="bg-gray-800 px-1.5 py-0.5 rounded mx-1">ESC</kbd> or click outside to close
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>,
+    document.body
+  );
+
+  return (
+    <>
+      <div 
+        onClick={() => setIsOpen(true)} 
+        className="cursor-pointer"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
+      >
+        {children}
+      </div>
+      {modal}
+    </>
   );
 }

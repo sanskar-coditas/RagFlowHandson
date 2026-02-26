@@ -479,7 +479,7 @@ export function HybridSearchViz({
                                   </div>
                                   <p className="text-sm text-gray-300 line-clamp-2">{r.text}</p>
                                   <p className="text-xs text-gray-500 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    👆 hover for full content
+                                    👆 click to view full content
                                   </p>
                                 </motion.div>
                               </ChunkPreviewTooltip>
