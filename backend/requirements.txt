@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+langchain
+langchain-openai
+langchain-text-splitters
+qdrant-client
+python-dotenv
+pydantic
+python-multipart
+PyMuPDF
+rank-bm25
+numpy
+scikit-learn
+openai
+boto3
+httpx
