@@ -53,14 +53,14 @@ Visit **http://localhost:3000** in your browser.
 
 ### 1. Document Chunking
 Split documents with configurable chunk size and overlap. Visualize how text is segmented for RAG.
-
+https://github.com/user-attachments/assets/54b2b293-8869-479a-b2b5-94c47eaf38d6
 ![Chunking](https://github.com/user-attachments/assets/fb7d3c2b-56ff-4c94-a39f-aa44f2dbb3c3)
 
 ### 2. Embeddings Generation
 Generate vector embeddings using multiple models (Azure OpenAI, Cohere Bedrock, NVIDIA NIM).
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/642fa33e-376d-4ccb-9714-cc384da2e1ab" width="48%" />
+  <img src="https://github.com/user-attachments/assets/fb7d3c2b-56ff-4c94-a39f-aa44f2dbb3c3" width="48%" />
   <img src="https://github.com/user-attachments/assets/b7ded92c-bbcf-40af-bc3a-1c3c6109a6ac" width="48%" />
 </p>
 
